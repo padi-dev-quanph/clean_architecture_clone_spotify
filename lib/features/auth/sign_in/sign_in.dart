@@ -1,10 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_state.dart';
+import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
+import 'package:flutter_clean_architecture_spotify/common/enums/sign_in_type.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_button.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and_password_req.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_navigator.dart';
+import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,43 +26,95 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppbar(
-        title: _buildLogo(),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // title
-              _buildTitle(),
-              const SizedBox(
-                height: 40,
-              ),
-              _buildForm(),
-              _recoveryButton(),
+    return BlocProvider<SignInCubit>(
+      create: (context) => sl(),
+      child: const Page(),
+    );
+  }
+}
 
-              _signInButton(context),
+class Page extends StatefulWidget {
+  const Page({
+    super.key,
+  });
 
-              // Divider
-              const SizedBox(
-                height: 20,
-              ),
-              _buildDivider(),
+  @override
+  State<Page> createState() => _PageState();
+}
 
-              const SizedBox(
-                height: 20,
-              ),
+class _PageState extends State<Page> {
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
 
-              // Social Login
-              _buildSocialLogin(),
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
 
-              const SizedBox(
-                height: 20,
-              ),
-              _buildSwitchToSignUp(context),
-            ],
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final navigator = SignInNavigator(context: context);
+    return BlocListener<SignInCubit, SignInState>(
+      listener: (context, state) {
+        if (state.loadStatus == LoadStatus.loading) {
+          navigator.showLoadingOverlay();
+        } else {
+          if (state.loadStatus == LoadStatus.failed) {
+            navigator.error(state.message);
+          } else if (state.loadStatus == LoadStatus.success) {
+            navigator.success(state.message);
+            navigator.goToMain();
+          }
+          navigator.hideLoadingOverlay();
+        }
+      },
+      child: Scaffold(
+        appBar: BasicAppbar(
+          title: _buildLogo(),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // title
+                _buildTitle(),
+                const SizedBox(
+                  height: 40,
+                ),
+                _buildForm(),
+                _recoveryButton(),
+
+                _signInButton(context),
+
+                // Divider
+                const SizedBox(
+                  height: 20,
+                ),
+                _buildDivider(),
+
+                const SizedBox(
+                  height: 20,
+                ),
+
+                // Social Login
+                _buildSocialLogin(),
+
+                const SizedBox(
+                  height: 20,
+                ),
+                _buildSwitchToSignUp(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -159,7 +219,11 @@ class _SignInPageState extends State<SignInPage> {
   BasicAppButton _signInButton(BuildContext context) {
     return BasicAppButton(
         onPressed: () {
-          GoRouter.of(context).pushReplacementNamed(AppRoutes.home);
+          final req = SignInEmailAndPasswordReq(
+              email: _emailController.text,
+              password: _passwordController.text,
+              signInType: SignInType.useEmailAndPassword);
+          sl<SignInCubit>().signIn(req);
         },
         title: 'Sign In');
   }
@@ -178,6 +242,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
       children: [
         TextField(
+            controller: _emailController,
             decoration: InputDecoration(
                 hintText: 'Enter Username Or Email',
                 hintStyle: const TextStyle(color: AppColors.textGreyDark),
@@ -193,6 +258,8 @@ class _SignInPageState extends State<SignInPage> {
           height: 20,
         ),
         TextField(
+            controller: _passwordController,
+            obscureText: true,
             decoration: InputDecoration(
                 hintText: 'Password',
                 hintStyle: const TextStyle(color: AppColors.textGreyDark),

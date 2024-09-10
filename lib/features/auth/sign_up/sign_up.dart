@@ -9,7 +9,8 @@ import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vector
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
 import 'package:flutter_clean_architecture_spotify/data/models/create_user_req.dart';
-import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/cubit/sign_up_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up_navigator.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +64,7 @@ class _PageState extends State<Page> {
 
   @override
   Widget build(BuildContext context) {
-    final navigator = AppNavigator(context: context);
+    final navigator = SignUpNavigator(context: context);
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state.loadStatus == LoadStatus.loading) {
@@ -71,8 +72,9 @@ class _PageState extends State<Page> {
         } else {
           if (state.loadStatus == LoadStatus.failed) {
             navigator.error(state.message);
-          } else {
+          } else if (state.loadStatus == LoadStatus.success) {
             navigator.success(state.message);
+            navigator.goToSignInPage();
           }
           navigator.hideLoadingOverlay();
         }

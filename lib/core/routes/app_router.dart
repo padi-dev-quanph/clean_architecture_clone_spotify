@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
-import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/pages/sign_in.dart';
-import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/pages/sign_up.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in.dart';
+import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in_or_sign_up/signup_or_signin.dart';
 import 'package:flutter_clean_architecture_spotify/features/music/pages/home.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/choose_mode.dart';

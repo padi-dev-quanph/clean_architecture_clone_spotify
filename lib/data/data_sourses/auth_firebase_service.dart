@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_clean_architecture_spotify/data/models/create_user_req.dart';
-import 'package:flutter_clean_architecture_spotify/data/models/sign_in_req.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and_password_req.dart';
 
 abstract class AuthFirebaseService {
   Future<Either> signup(CreateUserReq req);
-  Future<Either> singinWithEmailAndPassword(SignInReq req);
+  Future<Either> singinWithEmailAndPassword(SignInEmailAndPasswordReq req);
 }
 
 class AuthFirebaseServiceImpl implements AuthFirebaseService {
@@ -15,7 +15,7 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: req.email, password: req.password);
 
-      return const Right('Signup Successfully');
+      return const Right('Register successfully, You can login now!');
     } on FirebaseException catch (e) {
       String message = '';
       if (e.code == 'weak-password') {
@@ -30,17 +30,23 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
   }
 
   @override
-  Future<Either> singinWithEmailAndPassword(SignInReq req) async {
+  Future<Either> singinWithEmailAndPassword(
+      SignInEmailAndPasswordReq req) async {
     try {
       final user = FirebaseAuth.instance
           .signInWithEmailAndPassword(email: req.email, password: req.password);
+      print('user: ${user.toString()}');
       return Right(user);
     } on FirebaseException catch (e) {
       String message = '';
       if (e.code == 'wrong-password') {
         message = 'The password provided is wrong';
+      } else if (e.code == 'user-not-found') {
+        message = 'The email is not reigister. Please register to login!';
       }
       return Left(message);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }
