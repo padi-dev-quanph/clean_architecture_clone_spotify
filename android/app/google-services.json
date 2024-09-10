@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933945179471",
+    "project_id": "winter-spotify",
+    "storage_bucket": "winter-spotify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933945179471:android:64fe896c8f78bd847b193a",
+        "android_client_info": {
+          "package_name": "com.winter.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtESqOa7q7ysMN2A0pD4AiTWAh4-o-WEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
