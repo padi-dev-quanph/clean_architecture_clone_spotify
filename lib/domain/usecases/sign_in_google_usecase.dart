@@ -4,9 +4,10 @@ import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and
 import 'package:flutter_clean_architecture_spotify/domain/repository/auth.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 
-class SignInUsecase implements Usecase<Either, SignInEmailAndPasswordReq> {
+class SignInGoogleUsecase
+    implements Usecase<Either, SignInEmailAndPasswordReq> {
   @override
   Future<Either> call({SignInEmailAndPasswordReq? params}) async {
-    return await sl<AuthRepository>().signinWithEmailAndPassword(params!);
+    return await sl<AuthRepository>().signinWithGoole();
   }
 }

@@ -1,3 +1,5 @@
+import 'package:flutter_clean_architecture_spotify/domain/usecases/sign_in_google_usecase.dart';
+import 'package:flutter_clean_architecture_spotify/domain/usecases/sign_in_usecase.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/theme/theme_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/data/data_sourses/auth_firebase_service.dart';
@@ -10,16 +12,19 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
-  // Theme Bloc
-  sl.registerSingleton<ThemeCubit>(ThemeCubit());
-
+  // Services
   sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
 
+  // Repositories
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
 
+  // Usecases
   sl.registerSingleton<SignUpUsecase>(SignUpUsecase());
+  sl.registerSingleton<SignInUsecase>(SignInUsecase());
+  sl.registerSingleton<SignInGoogleUsecase>(SignInGoogleUsecase());
 
+  // Blocs
+  sl.registerSingleton<ThemeCubit>(ThemeCubit());
   sl.registerFactory<SignUpCubit>(SignUpCubit.new);
-
   sl.registerFactory<SignInCubit>(SignInCubit.new);
 }

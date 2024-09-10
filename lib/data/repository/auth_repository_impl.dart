@@ -12,7 +12,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either> singinWithEmailAndPassword(SignInEmailAndPasswordReq req) async {
-    return await sl<AuthFirebaseService>().singinWithEmailAndPassword(req);
+  Future<Either> signinWithEmailAndPassword(
+      SignInEmailAndPasswordReq req) async {
+    return await sl<AuthFirebaseService>().signinWithEmailAndPassword(req);
+  }
+
+  @override
+  Future<Either> signinWithGoole() async {
+    return await sl<AuthFirebaseService>().signInWithGoogle();
   }
 }

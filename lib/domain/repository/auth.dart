@@ -4,5 +4,6 @@ import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and
 
 abstract class AuthRepository {
   Future<Either> signup(CreateUserReq req);
-  Future<Either> singinWithEmailAndPassword(SignInEmailAndPasswordReq req);
+  Future<Either> signinWithEmailAndPassword(SignInEmailAndPasswordReq req);
+  Future<Either> signinWithGoole();
 }

@@ -151,7 +151,9 @@ class _PageState extends State<Page> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            context.read<SignInCubit>().signInWithGoogle();
+          },
           child: Container(
             height: 50,
             width: 50,
@@ -223,7 +225,7 @@ class _PageState extends State<Page> {
               email: _emailController.text,
               password: _passwordController.text,
               signInType: SignInType.useEmailAndPassword);
-          sl<SignInCubit>().signIn(req);
+          context.read<SignInCubit>().signInWithEmailAndPassword(req);
         },
         title: 'Sign In');
   }
