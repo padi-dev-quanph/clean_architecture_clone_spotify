@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_clean_architecture_spotify/data/models/create_user_req.dart';
@@ -14,8 +15,13 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
   @override
   Future<Either> signup(CreateUserReq req) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: req.email, password: req.password);
+
+      await FirebaseFirestore.instance.collection('users').add({
+        'name': req.fullName,
+        'email': data.user?.email,
+      });
 
       return const Right('Register successfully, You can login now!');
     } on FirebaseException catch (e) {
@@ -36,7 +42,7 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
       SignInEmailAndPasswordReq req) async {
     try {
       final credentialUser = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: req.email!, password: req.password!);
+          .signInWithEmailAndPassword(email: req.email, password: req.password);
       return Right(credentialUser);
     } on FirebaseException catch (e) {
       String message = '';

@@ -10,4 +10,7 @@ class AppVectors {
   static const String homeTopCard = '${_basePath}home_top_card$_format';
   static const String icGoogle = '${_basePath}ic_google$_format';
   static const String icApple = '${_basePath}ic_apple$_format';
+  static const String icSearch = '${_basePath}ic_search$_format';
+  static const String icMore = '${_basePath}ic_more$_format';
+  static const String btnPlay = '${_basePath}btn_play$_format';
 }
