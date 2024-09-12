@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
       if (FirebaseAuth.instance.currentUser != null) {
-        GoRouter.of(context).goNamed(AppRoutes.home);
+        GoRouter.of(context).goNamed(AppRoutes.bottomTab);
       } else {
         GoRouter.of(context).pushReplacement(AppRoutes.getStarted);
       }

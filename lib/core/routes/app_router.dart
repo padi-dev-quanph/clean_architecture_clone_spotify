@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
+import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in_or_sign_up/signup_or_signin.dart';
-import 'package:flutter_clean_architecture_spotify/features/music/home/home.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/bottom_app/bottom_app.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/now_playing/now_playing.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/choose_mode.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/get_started.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/splash.dart';
@@ -46,9 +48,20 @@ class AppRouter {
       pageBuilder: (context, state) => WebPage(child: const SignUpPage()),
     ),
     GoRoute(
-      path: AppRoutes.home, 
-      name: AppRoutes.home,
-      pageBuilder: (context, state) => WebPage(child: const HomePage())
+        path: AppRoutes.bottomTab,
+        name: AppRoutes.bottomTab,
+        pageBuilder: (context, state) => WebPage(child: const BottomApp())),
+    GoRoute(
+      path: AppRoutes.nowPlaying,
+      name: AppRoutes.nowPlaying,
+      pageBuilder: (context, state) {
+        final args = state.extra! as Map<String, dynamic>;
+        final song = args['song'] as SongEntity;
+        return WebPage(
+            child: NowPlayingPage(
+          song: song,
+        ));
+      },
     )
   ];
 }

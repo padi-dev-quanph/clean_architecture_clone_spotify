@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
-import 'package:flutter_clean_architecture_spotify/data/models/create_user_req.dart';
-import 'package:flutter_clean_architecture_spotify/domain/usecases/sign_up_usecase.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/auth/create_user_req.dart';
+import 'package:flutter_clean_architecture_spotify/domain/usecases/auth/sign_up_usecase.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

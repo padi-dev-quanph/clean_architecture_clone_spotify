@@ -10,7 +10,7 @@ import 'package:flutter_clean_architecture_spotify/common/widgets/basic_button.d
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
-import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and_password_req.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/auth/sign_in_email_and_password_req.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_navigator.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';

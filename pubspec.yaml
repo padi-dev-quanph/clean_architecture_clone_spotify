@@ -25,6 +25,7 @@ dependencies:
   ionicons: ^0.2.2
   equatable: ^2.0.5
   google_sign_in: ^6.2.1
+  persistent_bottom_nav_bar: ^6.2.1
 
 dev_dependencies:
   flutter_test:

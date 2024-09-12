@@ -13,4 +13,11 @@ class AppVectors {
   static const String icSearch = '${_basePath}ic_search$_format';
   static const String icMore = '${_basePath}ic_more$_format';
   static const String btnPlay = '${_basePath}btn_play$_format';
+  static const String icHomeBottomAppBar = '${_basePath}ic_home_bottom$_format';
+  static const String icDiscoveryBottomAppBar =
+      '${_basePath}ic_discovery_bottom$_format';
+  static const String icFavoriteBottomAppBar =
+      '${_basePath}ic_favorite_bottom$_format';
+  static const String icProfileBottomAppBar =
+      '${_basePath}ic_profile_bottom$_format';
 }

@@ -1,22 +1,39 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture_spotify/common/app_navigator.dart';
+import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
 import 'package:flutter_clean_architecture_spotify/common/helpers/is_dark_mode.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_images.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/home/home_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/home/home_state.dart';
 import 'package:flutter_clean_architecture_spotify/features/music/home/widgets/song_item.dart';
+import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider<HomeCubit>(
+      create: (context) => sl()..getNewSogns(),
+      child: const Page(),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class Page extends StatefulWidget {
+  const Page({super.key});
+
+  @override
+  State<Page> createState() => _PageState();
+}
+
+class _PageState extends State<Page> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int selectedIndex = 0;
   final List<String> tabs = [
@@ -69,6 +86,7 @@ class _HomePageState extends State<HomePage>
         ),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _homeTopCard(),
               _tabs(),
@@ -78,6 +96,9 @@ class _HomePageState extends State<HomePage>
                   controller: _tabController,
                   children: tabs.map((tab) => _buildSongCollection()).toList(),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               _playlist()
             ],
@@ -141,26 +162,50 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildSongCollection() {
-    return Container(
-      height: 270,
-      margin: const EdgeInsets.only(left: 20),
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return const SongItem();
-        },
-      ),
+    final navigator = AppNavigator(context: context);
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state.loadStatus == LoadStatus.failed) {
+          navigator.error(state.message);
+        }
+      },
+      builder: (context, state) {
+        if (state.loadStatus == LoadStatus.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.loadStatus == LoadStatus.failed) {
+          return const SizedBox.shrink();
+        } else if (state.loadStatus == LoadStatus.success) {
+          if (state.songs.isEmpty) {
+            return const SizedBox.shrink();
+          }
+          return Container(
+            height: 270,
+            margin: const EdgeInsets.only(left: 20),
+            child: ListView.separated(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: state.songs.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 20),
+              itemBuilder: (context, index) {
+                return SongItem(
+                  song: state.songs[index],
+                );
+              },
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 
   Widget _playlist() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -180,34 +225,41 @@ class _HomePageState extends State<HomePage>
                   ))
             ],
           ),
-          Column(
-            children: List.generate(1, (index) {
-              return ListTile(
-                leading: Container(
-                  height: 29,
-                  width: 29,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: context.isDarkMode
-                          ? AppColors.textGreyLight
-                          : AppColors.textGreyDark),
-                  child: Center(
-                    child: SvgPicture.asset(
-                        height: 14, width: 14, AppVectors.btnPlay),
-                  ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: 10,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Container(
+                height: 29,
+                width: 29,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: context.isDarkMode
+                        ? AppColors.textGreyLight
+                        : AppColors.textGreyDark),
+                child: Center(
+                  child: SvgPicture.asset(
+                      height: 14, width: 14, AppVectors.btnPlay),
                 ),
-                title: const Text(
-                  'As It Was',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+              ),
+              title: const Text(
+                'As It Was',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
-                subtitle: const Text(
-                  'Harry Styles',
-                  style: TextStyle(fontSize: 14),
-                ),
-                trailing: const Row(
+              ),
+              subtitle: const Text(
+                'Harry Styles',
+                style: TextStyle(fontSize: 14),
+              ),
+              trailing: Container(
+                constraints: const BoxConstraints(maxWidth: 60),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text('5:33'),
                     SizedBox(
@@ -216,11 +268,11 @@ class _HomePageState extends State<HomePage>
                     Icon(Icons.heart_broken)
                   ],
                 ),
-              );
-            }),
-          )
-        ],
-      ),
+              ),
+            );
+          },
+        )
+      ],
     );
   }
 }

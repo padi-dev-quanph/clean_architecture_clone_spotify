@@ -10,8 +10,9 @@ class AppRoutes {
   static const String register = '/register';
 
   // Music app
+  static const String bottomTab = '/bottom-tab';
   static const String home = '/home';
-  static const String music = '/music';
+  static const String nowPlaying = '/now-playing';
   static const String artic = '/artic';
   static const String articProfile = '/artic-profile';
 }

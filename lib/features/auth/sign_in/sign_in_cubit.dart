@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_clean_architecture_spotify/domain/usecases/sign_in_google_usecase.dart';
-import 'package:flutter_clean_architecture_spotify/domain/usecases/sign_in_usecase.dart';
+import 'package:flutter_clean_architecture_spotify/domain/usecases/auth/sign_in_google_usecase.dart';
+import 'package:flutter_clean_architecture_spotify/domain/usecases/auth/sign_in_usecase.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_state.dart';
 import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
 import 'package:flutter_clean_architecture_spotify/common/enums/sign_in_type.dart';
-import 'package:flutter_clean_architecture_spotify/data/models/sign_in_email_and_password_req.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/auth/sign_in_email_and_password_req.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 
 class SignInCubit extends Cubit<SignInState> {

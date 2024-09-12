@@ -8,7 +8,7 @@ import 'package:flutter_clean_architecture_spotify/common/widgets/basic_button.d
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
-import 'package:flutter_clean_architecture_spotify/data/models/create_user_req.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/auth/create_user_req.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up_navigator.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
