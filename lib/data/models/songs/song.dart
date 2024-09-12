@@ -7,9 +7,15 @@ class SongModel {
   final num? duration;
   final Timestamp? releaseDate;
   final String? cover;
+  final String? content;
 
   const SongModel(
-      {this.title, this.artist, this.duration, this.releaseDate, this.cover});
+      {this.title,
+      this.artist,
+      this.duration,
+      this.releaseDate,
+      this.cover,
+      this.content});
 
   factory SongModel.fromJson(Map<String, dynamic> data) {
     return SongModel(
@@ -18,6 +24,7 @@ class SongModel {
       duration: data['duration'],
       releaseDate: data['releaseDate'],
       cover: data['cover'],
+      content: data['content'],
     );
   }
 
@@ -27,7 +34,8 @@ class SongModel {
       'artist': artist,
       'duration': duration,
       'releaseDate': releaseDate,
-      'cover': cover
+      'cover': cover,
+      'content': content
     };
   }
 }
@@ -40,6 +48,7 @@ extension SongModelX on SongModel {
       duration: duration!,
       releaseDate: releaseDate!,
       cover: cover!,
+      content: content!,
     );
   }
 }

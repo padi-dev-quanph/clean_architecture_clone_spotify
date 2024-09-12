@@ -52,6 +52,13 @@
     <array>
       <string>com.googleusercontent.apps.933945179471-v4srjsgbb2q0q5ad7qrcg73o7jjf8hem</string>
     </array>
+	<key>NSMicrophoneUsageDescription</key>
+<string>... explain why the app uses the microphone here ...</string>
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
   </dict>
 </array>
 

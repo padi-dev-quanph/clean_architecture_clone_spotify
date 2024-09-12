@@ -34,14 +34,33 @@ class _BottomAppState extends State<BottomApp> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      onItemSelected: (value) => setState(() {
-        selectedIndex = value;
-      }),
+    return Stack(
+      children: [
+        PersistentTabView(
+          context,
+          controller: controller,
+          screens: _buildScreens(),
+          items: _navBarsItems(),
+          onItemSelected: (value) => setState(() {
+            selectedIndex = value;
+          }),
+        ),
+        // current playing music
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: _buildFAB(),
+        )
+      ],
+    );
+  }
+
+  Widget _buildFAB() {
+    return FloatingActionButton(
+      backgroundColor: AppColors.primary,
+      onPressed: () {},
+      child: Container(
+        child: Text('playing'),
+      ),
     );
   }
 

@@ -20,4 +20,10 @@ class AppVectors {
       '${_basePath}ic_favorite_bottom$_format';
   static const String icProfileBottomAppBar =
       '${_basePath}ic_profile_bottom$_format';
+  static const String icRepeat = '${_basePath}ic_repeat$_format';
+  static const String icPlayBack = '${_basePath}ic_playback$_format';
+  static const String icPlaying = '${_basePath}ic_playing$_format';
+  static const String icPlayNext = '${_basePath}ic_playnext$_format';
+  static const String icShuffle = '${_basePath}ic_shuffle$_format';
+  static const String icTopArrow = '${_basePath}ic_top_arrow$_format';
 }

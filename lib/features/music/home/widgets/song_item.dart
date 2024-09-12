@@ -32,7 +32,7 @@ class SongItem extends StatelessWidget {
                   child: Container(
                     height: 40,
                     width: 40,
-                    transform: Matrix4.translationValues(10, 10, 0),
+                    transform: Matrix4.translationValues(-10, 8, 0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: context.isDarkMode
