@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/theme/theme_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_theme.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/app_router.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<ThemeCubit>(
           create: (context) => sl<ThemeCubit>(),
+        ),
+        BlocProvider<NowPlayingCubit>(
+          create: (context) => sl<NowPlayingCubit>(),
         ),
       ],
       child: GestureDetector(

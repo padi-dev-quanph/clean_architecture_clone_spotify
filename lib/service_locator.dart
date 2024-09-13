@@ -1,3 +1,4 @@
+import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/data/data_sourses/song/song_firebase_service.dart';
 import 'package:flutter_clean_architecture_spotify/data/repository/song/song_repository_impl.dart';
 import 'package:flutter_clean_architecture_spotify/domain/repository/song/song.dart';
@@ -34,4 +35,5 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<SignUpCubit>(SignUpCubit.new);
   sl.registerFactory<SignInCubit>(SignInCubit.new);
   sl.registerFactory<HomeCubit>(HomeCubit.new);
+  sl.registerSingleton<NowPlayingCubit>(NowPlayingCubit());
 }

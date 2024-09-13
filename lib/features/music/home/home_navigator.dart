@@ -7,6 +7,8 @@ class HomeNavigator extends AppNavigator {
   HomeNavigator({required super.context});
 
   void goToNowPlaying(SongEntity song) {
-    GoRouter.of(context).pushNamed(AppRoutes.nowPlaying, extra: {'song': song});
+    GoRouter.of(context).pushNamed(AppRoutes.nowPlaying, extra: {'song': song, 
+      'uniqueTag': 'winter'
+    });
   }
 }

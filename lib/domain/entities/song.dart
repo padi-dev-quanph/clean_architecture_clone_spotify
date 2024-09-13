@@ -16,4 +16,15 @@ class SongEntity {
     required this.cover,
     required this.content,
   });
+
+  factory SongEntity.empty() {
+    return SongEntity(
+      title: '',
+      artist: '',
+      duration: 0,
+      releaseDate: Timestamp.now(),
+      cover: '',
+      content: '',
+    );
+  }
 }

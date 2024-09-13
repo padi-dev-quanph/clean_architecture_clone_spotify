@@ -57,9 +57,11 @@ class AppRouter {
       pageBuilder: (context, state) {
         final args = state.extra! as Map<String, dynamic>;
         final song = args['song'] as SongEntity;
+        final uniqueTag = args['uniqueTag'] as String;
         return WebPage(
             child: NowPlayingPage(
           song: song,
+          uniqueTag: uniqueTag,
         ));
       },
     )

@@ -1,52 +1,47 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_state.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
 import 'package:flutter_clean_architecture_spotify/core/helper/time_ex.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
+import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:just_audio/just_audio.dart';
 
 class NowPlayingPage extends StatelessWidget {
-  const NowPlayingPage({super.key, required this.song});
+  const NowPlayingPage(
+      {super.key, required this.song, required this.uniqueTag});
 
   final SongEntity song;
+  final String uniqueTag;
 
   @override
   Widget build(BuildContext context) {
     return Page(
       song: song,
+      uniqueTag: uniqueTag,
     );
   }
 }
 
 class Page extends StatefulWidget {
-  const Page({super.key, required this.song});
+  const Page({super.key, required this.song, required this.uniqueTag});
   final SongEntity song;
+  final String uniqueTag;
 
   @override
   State<Page> createState() => _PageState();
 }
 
 class _PageState extends State<Page> {
-  final AudioPlayer _player = AudioPlayer();
-  bool _isPlaying = true;
-  Duration position = Duration.zero;
+  late NowPlayingCubit cubit;
 
   @override
   void initState() {
     super.initState();
-    _initializeTimer();
-    _player.positionStream.listen((p) {
-      setState(() => position = p);
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    cubit = sl<NowPlayingCubit>()..loadSong(widget.song);
   }
 
   @override
@@ -110,22 +105,29 @@ class _PageState extends State<Page> {
                 AppVectors.icPlayBack),
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: _handlePlayPause,
-            child: Container(
-              height: 72,
-              width: 72,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: AppColors.primary),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                  height: 28,
-                  width: 28,
-                  fit: BoxFit.cover,
-                  colorFilter: const ColorFilter.mode(
-                      AppColors.lightBackground, BlendMode.srcIn),
-                  _isPlaying ? AppVectors.icPlaying : AppVectors.btnPlay),
-            ),
+          BlocSelector<NowPlayingCubit, NowPlayingState, bool>(
+            selector: (state) {
+              return state.isPlaying;
+            },
+            builder: (context, isPlaying) {
+              return GestureDetector(
+                onTap: cubit.handlePlayPause,
+                child: Container(
+                  height: 72,
+                  width: 72,
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: AppColors.primary),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                      height: 28,
+                      width: 28,
+                      fit: BoxFit.cover,
+                      colorFilter: const ColorFilter.mode(
+                          AppColors.lightBackground, BlendMode.srcIn),
+                      isPlaying ? AppVectors.icPlaying : AppVectors.btnPlay),
+                ),
+              );
+            },
           ),
           const Spacer(),
           GestureDetector(
@@ -148,15 +150,18 @@ class _PageState extends State<Page> {
   }
 
   Widget _buildThumbnail() {
-    return Container(
-      height: 370,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          image: DecorationImage(
-              image: NetworkImage(
-                widget.song.cover,
-              ),
-              fit: BoxFit.cover)),
+    return Hero(
+      tag: '${widget.uniqueTag}${widget.song.cover}',
+      child: Container(
+        height: 370,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+                image: NetworkImage(
+                  widget.song.cover,
+                ),
+                fit: BoxFit.cover)),
+      ),
     );
   }
 
@@ -204,44 +209,31 @@ class _PageState extends State<Page> {
   }
 
   Widget _buildSlider() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Slider(
-          min: 0.0,
-          max: getTimeFollowSecond(widget.song.duration),
-          value: position.inSeconds.toDouble(),
-          onChanged: _handleSeek,
-          activeColor: AppColors.darkGrey,
-        ),
-        Row(
+    return BlocSelector<NowPlayingCubit, NowPlayingState, Duration>(
+      selector: (state) {
+        return state.position;
+      },
+      builder: (context, position) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(formatDuration(_player.position)),
-            const Spacer(),
-            Text(convertDurationFromNum(widget.song.duration)),
+            Slider(
+              min: 0.0,
+              max: getTimeFollowSecond(widget.song.duration),
+              value: position.inSeconds.toDouble(),
+              onChanged: cubit.handleSeek,
+              activeColor: AppColors.darkGrey,
+            ),
+            Row(
+              children: [
+                Text(formatDuration(position)),
+                const Spacer(),
+                Text(convertDurationFromNum(widget.song.duration)),
+              ],
+            )
           ],
-        )
-      ],
+        );
+      },
     );
-  }
-
-  void _initializeTimer() async {
-    await _player.setUrl(widget.song.content);
-    await _player.play();
-  }
-
-  void _handlePlayPause() {
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
-    if (_player.playing) {
-      _player.pause();
-    } else {
-      _player.play();
-    }
-  }
-
-  void _handleSeek(double value) {
-    _player.seek(Duration(seconds: value.toInt()));
   }
 }
