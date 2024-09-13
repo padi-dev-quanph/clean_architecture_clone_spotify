@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/songs/lyric.dart';
 
 class SongEntity {
   final String title;
@@ -7,6 +8,7 @@ class SongEntity {
   final Timestamp releaseDate;
   final String cover;
   final String content;
+  // final List<Lyric> lyrics;
 
   const SongEntity({
     required this.title,
@@ -15,6 +17,7 @@ class SongEntity {
     required this.releaseDate,
     required this.cover,
     required this.content,
+    // required this.lyrics,
   });
 
   factory SongEntity.empty() {
@@ -25,6 +28,7 @@ class SongEntity {
       releaseDate: Timestamp.now(),
       cover: '',
       content: '',
+      // lyrics: [],
     );
   }
 }

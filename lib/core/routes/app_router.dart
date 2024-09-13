@@ -5,6 +5,7 @@ import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_up/sign_up.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in_or_sign_up/signup_or_signin.dart';
 import 'package:flutter_clean_architecture_spotify/features/music/bottom_app/bottom_app.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/lyric/lyric.dart';
 import 'package:flutter_clean_architecture_spotify/features/music/now_playing/now_playing.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/choose_mode.dart';
 import 'package:flutter_clean_architecture_spotify/features/welcome/pages/get_started.dart';
@@ -62,6 +63,17 @@ class AppRouter {
             child: NowPlayingPage(
           song: song,
           uniqueTag: uniqueTag,
+        ));
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.lyric,
+      name: AppRoutes.lyric,
+      pageBuilder: (context, state) {
+        final args = state.extra! as Map<String, dynamic>;
+        final song = args['song'] as SongEntity;
+        return WebPage(child: LyricPage(
+          song: song,
         ));
       },
     )

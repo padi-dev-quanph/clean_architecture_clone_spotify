@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_state.dart';
 import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
-import 'package:flutter_clean_architecture_spotify/core/helper/time_ex.dart';
+import 'package:flutter_clean_architecture_spotify/common/helpers/time_ex.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
 import 'package:just_audio/just_audio.dart';
 

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_clean_architecture_spotify/data/models/songs/lyric.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
 
 class SongModel {
@@ -8,14 +9,17 @@ class SongModel {
   final Timestamp? releaseDate;
   final String? cover;
   final String? content;
+  // final List<Lyric>? lyrics;
 
-  const SongModel(
-      {this.title,
-      this.artist,
-      this.duration,
-      this.releaseDate,
-      this.cover,
-      this.content});
+  const SongModel({
+    this.title,
+    this.artist,
+    this.duration,
+    this.releaseDate,
+    this.cover,
+    this.content,
+    // this.lyrics
+  });
 
   factory SongModel.fromJson(Map<String, dynamic> data) {
     return SongModel(
@@ -25,6 +29,9 @@ class SongModel {
       releaseDate: data['releaseDate'],
       cover: data['cover'],
       content: data['content'],
+      // lyrics: (data['lyrics'] as List)
+      //     .map((lyric) => Lyric.fromJson(lyric))
+      //     .toList(),
     );
   }
 
@@ -35,8 +42,31 @@ class SongModel {
       'duration': duration,
       'releaseDate': releaseDate,
       'cover': cover,
-      'content': content
+      'content': content,
+      // 'lyrics': lyrics
     };
+  }
+
+  // copyWith
+
+  SongModel copyWith({
+    String? title,
+    String? artist,
+    num? duration,
+    Timestamp? releaseDate,
+    String? cover,
+    String? content,
+    // List<Lyric>? lyrics,
+  }) {
+    return SongModel(
+      title: title ?? this.title,
+      artist: artist ?? this.artist,
+      duration: duration ?? this.duration,
+      releaseDate: releaseDate ?? this.releaseDate,
+      cover: cover ?? this.cover,
+      content: content ?? this.content,
+      // lyrics: lyrics ?? this.lyrics,
+    );
   }
 }
 
@@ -49,6 +79,7 @@ extension SongModelX on SongModel {
       releaseDate: releaseDate!,
       cover: cover!,
       content: content!,
+      // lyrics: lyrics!,
     );
   }
 }

@@ -5,10 +5,12 @@ import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
-import 'package:flutter_clean_architecture_spotify/core/helper/time_ex.dart';
+import 'package:flutter_clean_architecture_spotify/common/helpers/time_ex.dart';
+import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class NowPlayingPage extends StatelessWidget {
   const NowPlayingPage(
@@ -166,16 +168,23 @@ class _PageState extends State<Page> {
   }
 
   Widget _buildShowLyric() {
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          SvgPicture.asset(AppVectors.icTopArrow),
-          const Text(
-            'Lyrics',
-            style: TextStyle(fontSize: 14),
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).pushNamed(AppRoutes.lyric, extra: {
+          'song': widget.song,
+        });
+      },
+      child: Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            SvgPicture.asset(AppVectors.icTopArrow),
+            const Text(
+              'Lyrics',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
       ),
     );
   }
