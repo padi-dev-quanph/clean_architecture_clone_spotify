@@ -131,19 +131,48 @@ class _LyricPageState extends State<LyricPage> {
                                                         .remainder(60),
                                                     second: duration.inSeconds
                                                         .remainder(60));
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 16.0),
-                                          child: Text(
-                                            widget.song.lyrics[index].words!,
-                                            style: TextStyle(
-                                              color: widget.song.lyrics[index]
-                                                      .timeStamp!
-                                                      .isAfter(dt)
-                                                  ? AppColors.textWhite
-                                                  : AppColors.primary,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Duration d = Duration(
+                                                hours: widget.song.lyrics[index]
+                                                    .timeStamp!.hour,
+                                                minutes: widget
+                                                    .song
+                                                    .lyrics[index]
+                                                    .timeStamp!
+                                                    .minute,
+                                                seconds: widget
+                                                    .song
+                                                    .lyrics[index]
+                                                    .timeStamp!
+                                                    .second,
+                                                milliseconds: widget
+                                                    .song
+                                                    .lyrics[index]
+                                                    .timeStamp!
+                                                    .millisecond,
+                                                microseconds: widget
+                                                    .song
+                                                    .lyrics[index]
+                                                    .timeStamp!
+                                                    .microsecond);
+                                            sl<NowPlayingCubit>().handleSeek(
+                                                d.inSeconds.toDouble());
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 16.0),
+                                            child: Text(
+                                              widget.song.lyrics[index].words!,
+                                              style: TextStyle(
+                                                color: widget.song.lyrics[index]
+                                                        .timeStamp!
+                                                        .isAfter(dt)
+                                                    ? AppColors.textWhite
+                                                    : AppColors.primary,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                           ),
                                         );
