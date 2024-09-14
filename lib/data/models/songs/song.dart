@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_clean_architecture_spotify/data/models/songs/lyric.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
+import 'package:intl/intl.dart';
 
 class SongModel {
   final String? title;
@@ -9,17 +10,16 @@ class SongModel {
   final Timestamp? releaseDate;
   final String? cover;
   final String? content;
-  // final List<Lyric>? lyrics;
+  final String? lyrics;
 
-  const SongModel({
-    this.title,
-    this.artist,
-    this.duration,
-    this.releaseDate,
-    this.cover,
-    this.content,
-    // this.lyrics
-  });
+  const SongModel(
+      {this.title,
+      this.artist,
+      this.duration,
+      this.releaseDate,
+      this.cover,
+      this.content,
+      this.lyrics});
 
   factory SongModel.fromJson(Map<String, dynamic> data) {
     return SongModel(
@@ -29,9 +29,7 @@ class SongModel {
       releaseDate: data['releaseDate'],
       cover: data['cover'],
       content: data['content'],
-      // lyrics: (data['lyrics'] as List)
-      //     .map((lyric) => Lyric.fromJson(lyric))
-      //     .toList(),
+      lyrics: data['lyrics'],
     );
   }
 
@@ -43,21 +41,20 @@ class SongModel {
       'releaseDate': releaseDate,
       'cover': cover,
       'content': content,
-      // 'lyrics': lyrics
+      'lyrics': lyrics
     };
   }
 
   // copyWith
 
-  SongModel copyWith({
-    String? title,
-    String? artist,
-    num? duration,
-    Timestamp? releaseDate,
-    String? cover,
-    String? content,
-    // List<Lyric>? lyrics,
-  }) {
+  SongModel copyWith(
+      {String? title,
+      String? artist,
+      num? duration,
+      Timestamp? releaseDate,
+      String? cover,
+      String? content,
+      String? lyrics}) {
     return SongModel(
       title: title ?? this.title,
       artist: artist ?? this.artist,
@@ -65,7 +62,7 @@ class SongModel {
       releaseDate: releaseDate ?? this.releaseDate,
       cover: cover ?? this.cover,
       content: content ?? this.content,
-      // lyrics: lyrics ?? this.lyrics,
+      lyrics: lyrics ?? this.lyrics,
     );
   }
 }
@@ -79,7 +76,20 @@ extension SongModelX on SongModel {
       releaseDate: releaseDate!,
       cover: cover!,
       content: content!,
-      // lyrics: lyrics!,
+      lyrics: lyrics!
+          .split('[winter]')
+          .map((e) {
+            final parts = e.split('[w]');
+            if (parts.length > 1) {
+              final text = parts[1];
+              final timeString = parts[0].replaceAll('[', '').trim();
+              final time = DateFormat('mm:ss.SS').parse(timeString);
+              return Lyric(text, time);
+            }
+            return Lyric('xxx', DateTime.now());
+          })
+          .where((e) => e.words != 'xxx')
+          .toList(),
     );
   }
 }

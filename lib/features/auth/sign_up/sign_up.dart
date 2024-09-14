@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_clean_architecture_spotify/common/app_navigator.dart';
 import 'package:flutter_clean_architecture_spotify/common/enums/load_status.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_button.dart';

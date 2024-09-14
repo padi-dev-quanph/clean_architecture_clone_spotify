@@ -14,12 +14,17 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
     });
   }
 
-  void _updateSongPlayer(Duration position) {
+  void _updateSongPlayer(Duration position) async {
     if (getTimeFollowSecond(state.song.duration) ==
         position.inSeconds.toDouble()) {
-      emit(state.copyWith(isPlaying: false));
+      emit(state.copyWith(isPlaying: false, position: position));
+    } else {
+      if (state.isPlaying) {
+        emit(state.copyWith(position: position));
+      } else {
+        emit(state.copyWith(position: position, isPlaying: true));
+      }
     }
-    emit(state.copyWith(position: position));
   }
 
   void loadSong(SongEntity song) async {
@@ -36,13 +41,15 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
     }
   }
 
-  void handlePlayPause() {
+  void handlePlayPause() async {
     if (player.playing) {
-      player.pause();
-      emit(state.copyWith(isPlaying: false));
+      player.pause().then((value) {
+        emit(state.copyWith(isPlaying: false));
+      });
     } else {
-      player.play();
-      emit(state.copyWith(isPlaying: true));
+      player.play().then((value) {
+        emit(state.copyWith(isPlaying: true));
+      });
     }
   }
 
@@ -52,9 +59,11 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
   }
 
   void handleSeek(double value) {
-    player.seek(Duration(seconds: value.toInt())).then((value) {
-      _updateSongPlayer(player.position);
-    });
+    player
+      ..seek(Duration(seconds: value.toInt())).then((value) {
+        _updateSongPlayer(player.position);
+      })
+      ..play();
   }
 
   @override

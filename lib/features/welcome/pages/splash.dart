@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
-import 'package:flutter_clean_architecture_spotify/core/routes/app_router.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';

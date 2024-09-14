@@ -5,9 +5,15 @@ class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final Widget? action;
   final Color? backgroundColor;
+  final double? height;
   final Widget? leading;
   const BasicAppbar(
-      {this.title, this.leading, this.action, this.backgroundColor, super.key});
+      {this.title,
+      this.leading,
+      this.action,
+      this.backgroundColor,
+      super.key,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,7 @@ class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: backgroundColor ?? Colors.transparent,
       elevation: 0,
+      toolbarHeight: height ?? 50,
       centerTitle: true,
       title: title ?? const Text(''),
       actions: [action ?? Container()],

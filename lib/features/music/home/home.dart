@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -184,9 +185,12 @@ class _PageState extends State<Page> with SingleTickerProviderStateMixin {
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: state.songs.length,
+              itemCount: state.songs.length + 1,
               separatorBuilder: (_, __) => const SizedBox(width: 20),
               itemBuilder: (context, index) {
+                if (index == state.songs.length) {
+                  return const SizedBox(width: 10);
+                }
                 return SongItem(
                   song: state.songs[index],
                 );

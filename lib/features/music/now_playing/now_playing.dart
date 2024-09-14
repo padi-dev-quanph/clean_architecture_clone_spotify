@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_cubit.dart';
-import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_state.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
-import 'package:flutter_clean_architecture_spotify/common/helpers/time_ex.dart';
 import 'package:flutter_clean_architecture_spotify/core/routes/routes.dart';
 import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/now_playing/widgets/slider_song.dart';
+import 'package:flutter_clean_architecture_spotify/features/music/now_playing/widgets/song_action.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -74,79 +73,14 @@ class _PageState extends State<Page> {
               const Spacer(),
               _buildSongInfo(),
               const Spacer(),
-              _buildSlider(),
+              SliderSong(duration: widget.song.duration),
               const Spacer(),
-              _buildButtonActions(),
+              const SongAction(),
               const Spacer(),
               _buildShowLyric(),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildButtonActions() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(
-                height: 24, width: 24, fit: BoxFit.cover, AppVectors.icRepeat),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(
-                height: 26,
-                width: 26,
-                fit: BoxFit.cover,
-                AppVectors.icPlayBack),
-          ),
-          const Spacer(),
-          BlocSelector<NowPlayingCubit, NowPlayingState, bool>(
-            selector: (state) {
-              return state.isPlaying;
-            },
-            builder: (context, isPlaying) {
-              return GestureDetector(
-                onTap: cubit.handlePlayPause,
-                child: Container(
-                  height: 72,
-                  width: 72,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.primary),
-                  alignment: Alignment.center,
-                  child: SvgPicture.asset(
-                      height: 28,
-                      width: 28,
-                      fit: BoxFit.cover,
-                      colorFilter: const ColorFilter.mode(
-                          AppColors.lightBackground, BlendMode.srcIn),
-                      isPlaying ? AppVectors.icPlaying : AppVectors.btnPlay),
-                ),
-              );
-            },
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(
-                height: 26,
-                width: 26,
-                fit: BoxFit.cover,
-                AppVectors.icPlayNext),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(
-                height: 24, width: 24, fit: BoxFit.cover, AppVectors.icShuffle),
-          ),
-        ],
       ),
     );
   }
@@ -214,35 +148,6 @@ class _PageState extends State<Page> {
             onTap: () {},
             child: SvgPicture.asset(AppVectors.icFavoriteBottomAppBar))
       ],
-    );
-  }
-
-  Widget _buildSlider() {
-    return BlocSelector<NowPlayingCubit, NowPlayingState, Duration>(
-      selector: (state) {
-        return state.position;
-      },
-      builder: (context, position) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Slider(
-              min: 0.0,
-              max: getTimeFollowSecond(widget.song.duration),
-              value: position.inSeconds.toDouble(),
-              onChanged: cubit.handleSeek,
-              activeColor: AppColors.darkGrey,
-            ),
-            Row(
-              children: [
-                Text(formatDuration(position)),
-                const Spacer(),
-                Text(convertDurationFromNum(widget.song.duration)),
-              ],
-            )
-          ],
-        );
-      },
     );
   }
 }

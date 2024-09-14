@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_spotify/common/helpers/is_dark_mode.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
-import 'package:flutter_clean_architecture_spotify/common/widgets/basic_button.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_images.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
