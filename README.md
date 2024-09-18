@@ -12,7 +12,7 @@
 
 ### Development Notice
 
-1- Clone project with https://github.com/winter071203/flutter_ecommerce_app.git
+1- Clone project with https://github.com/padi-dev-quanph/clean_architecture_clone_spotify
 
 2- Run **flutter pub get** in terminal
 
