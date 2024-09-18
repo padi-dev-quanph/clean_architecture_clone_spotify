@@ -8,4 +8,9 @@ class SongRepositoryImpl implements SongRepository {
   Future<Either> getNewSongs() async {
     return await sl<SongFirebaseService>().getNewSongs();
   }
+
+  @override
+  Future<Either> updateSong(song) {
+    return sl<SongFirebaseService>().updateSong(song);
+  }
 }

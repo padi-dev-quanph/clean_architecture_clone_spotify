@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>933945179471-v4srjsgbb2q0q5ad7qrcg73o7jjf8hem.apps.googleusercontent.com</string>
+	<string>933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.933945179471-v4srjsgbb2q0q5ad7qrcg73o7jjf8hem</string>
+	<string>com.googleusercontent.apps.933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>933945179471-ognd6999ngdpibl2vb1lvkqnn629m2oo.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCdRw7d215lhzTAD012Z2qptiTfTDvt5vo</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.flutterCleanArchitectureSpotify</string>
+	<string>com.winter.music</string>
 	<key>PROJECT_ID</key>
 	<string>winter-spotify</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:933945179471:ios:c7bcc5a5894d07387b193a</string>
+	<string>1:933945179471:ios:cef37422e009c0d47b193a</string>
 </dict>
 </plist>

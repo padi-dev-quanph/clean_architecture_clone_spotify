@@ -9,10 +9,23 @@
       "client_info": {
         "mobilesdk_app_id": "1:933945179471:android:64fe896c8f78bd847b193a",
         "android_client_info": {
-          "package_name": "com.winter.app"
+          "package_name": "com.winter.flutter_clean_architecture_spotify"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "933945179471-ognd6999ngdpibl2vb1lvkqnn629m2oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.winter.flutter_clean_architecture_spotify",
+            "certificate_hash": "dadff8df619e5579e2f83229be6f15a70007efa9"
+          }
+        },
+        {
+          "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDtESqOa7q7ysMN2A0pD4AiTWAh4-o-WEE"
@@ -20,7 +33,91 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.winter.music"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933945179471:android:94500da3673eb6727b193a",
+        "android_client_info": {
+          "package_name": "com.winter.flutter_clean_architecture_spotify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtESqOa7q7ysMN2A0pD4AiTWAh4-o-WEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.winter.music"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933945179471:android:99599bafd532e3117b193a",
+        "android_client_info": {
+          "package_name": "com.winter.flutter_clean_architecture_spotify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtESqOa7q7ysMN2A0pD4AiTWAh4-o-WEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933945179471-qt8egslqh191hc7c3og0qg2tgo8g63kq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.winter.music"
+              }
+            }
+          ]
         }
       }
     }

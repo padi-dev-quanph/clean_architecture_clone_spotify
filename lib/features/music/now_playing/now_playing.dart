@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_cubit.dart';
+import 'package:flutter_clean_architecture_spotify/common/blocs/now_playing/now_playing_state.dart';
 import 'package:flutter_clean_architecture_spotify/common/widgets/basic_appbar.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/assets/app_vectors.dart';
 import 'package:flutter_clean_architecture_spotify/core/config/theme/app_colors.dart';
@@ -29,6 +32,7 @@ class NowPlayingPage extends StatelessWidget {
 
 class Page extends StatefulWidget {
   const Page({super.key, required this.song, required this.uniqueTag});
+
   final SongEntity song;
   final String uniqueTag;
 
@@ -42,7 +46,8 @@ class _PageState extends State<Page> {
   @override
   void initState() {
     super.initState();
-    cubit = sl<NowPlayingCubit>()..loadSong(widget.song);
+    cubit = sl<NowPlayingCubit>()
+      ..loadSong(widget.song);
   }
 
   @override
@@ -60,7 +65,7 @@ class _PageState extends State<Page> {
             width: 25,
             AppVectors.icMore,
             colorFilter:
-                const ColorFilter.mode(AppColors.darkGrey, BlendMode.srcIn),
+            const ColorFilter.mode(AppColors.darkGrey, BlendMode.srcIn),
           ),
         ),
       ),
@@ -144,9 +149,19 @@ class _PageState extends State<Page> {
                 ))
           ],
         ),
-        GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(AppVectors.icFavoriteBottomAppBar))
+        BlocSelector<NowPlayingCubit, NowPlayingState, SongEntity>(
+          selector: (state) => state.song,
+          builder: (context, song) {
+            return GestureDetector(
+                onTap: cubit.handleLikeSong,
+                child: SvgPicture.asset(
+                    colorFilter: song.isFavorite ?  const ColorFilter.mode(
+                      Colors.pink,
+                      BlendMode.srcIn
+                    ) : null,
+                    AppVectors.icFavoriteBottomAppBar));
+          },
+        )
       ],
     );
   }

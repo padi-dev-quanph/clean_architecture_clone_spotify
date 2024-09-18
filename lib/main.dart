@@ -11,6 +11,7 @@ import 'package:flutter_clean_architecture_spotify/firebase_options.dart';
 import 'package:flutter_clean_architecture_spotify/service_locator.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
@@ -21,7 +22,12 @@ void main() async {
         : await getApplicationDocumentsDirectory(),
   );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await initializeDependencies();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.myapp.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+  await initializeDependencies(); 
   runApp(const MyApp());
 }
 

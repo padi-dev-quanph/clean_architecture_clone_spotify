@@ -952,6 +952,8 @@ PODS:
   - AppAuth/Core (1.7.5)
   - AppAuth/ExternalUserAgent (1.7.5):
     - AppAuth/Core
+  - audio_service (0.0.1):
+    - Flutter
   - audio_session (0.0.1):
     - Flutter
   - BoringSSL-GRPC (0.0.32):
@@ -1149,8 +1151,12 @@ PODS:
     - FlutterMacOS
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
+  - sqflite (0.0.3):
+    - Flutter
+    - FlutterMacOS
 
 DEPENDENCIES:
+  - audio_service (from `.symlinks/plugins/audio_service/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -1159,6 +1165,7 @@ DEPENDENCIES:
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
 
 SPEC REPOS:
   trunk:
@@ -1186,6 +1193,8 @@ SPEC REPOS:
     - RecaptchaInterop
 
 EXTERNAL SOURCES:
+  audio_service:
+    :path: ".symlinks/plugins/audio_service/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   cloud_firestore:
@@ -1202,10 +1211,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/just_audio/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/darwin"
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  audio_service: f509d65da41b9521a61f1c404dd58651f265a567
   audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
   BoringSSL-GRPC: 1e2348957acdbcad360b80a264a90799984b2ba6
   cloud_firestore: 73eece22ce25a0565238c283ee9990f1618d8063
@@ -1234,6 +1246,7 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

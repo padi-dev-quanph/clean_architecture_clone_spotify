@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDtESqOa7q7ysMN2A0pD4AiTWAh4-o-WEE',
-    appId: '1:933945179471:android:64fe896c8f78bd847b193a',
+    appId: '1:933945179471:android:94500da3673eb6727b193a',
     messagingSenderId: '933945179471',
     projectId: 'winter-spotify',
     storageBucket: 'winter-spotify.appspot.com',
@@ -59,11 +59,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCdRw7d215lhzTAD012Z2qptiTfTDvt5vo',
-    appId: '1:933945179471:ios:c7bcc5a5894d07387b193a',
+    appId: '1:933945179471:ios:cef37422e009c0d47b193a',
     messagingSenderId: '933945179471',
     projectId: 'winter-spotify',
     storageBucket: 'winter-spotify.appspot.com',
-    iosBundleId: 'com.example.flutterCleanArchitectureSpotify',
+    androidClientId: '933945179471-ognd6999ngdpibl2vb1lvkqnn629m2oo.apps.googleusercontent.com',
+    iosClientId: '933945179471-uvsqnbpabirm0s6u3suuqa6rvg4uet06.apps.googleusercontent.com',
+    iosBundleId: 'com.winter.music',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -72,6 +74,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '933945179471',
     projectId: 'winter-spotify',
     storageBucket: 'winter-spotify.appspot.com',
+    androidClientId: '933945179471-ognd6999ngdpibl2vb1lvkqnn629m2oo.apps.googleusercontent.com',
+    iosClientId: '933945179471-v4srjsgbb2q0q5ad7qrcg73o7jjf8hem.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterCleanArchitectureSpotify',
   );
 
@@ -83,4 +87,5 @@ class DefaultFirebaseOptions {
     authDomain: 'winter-spotify.firebaseapp.com',
     storageBucket: 'winter-spotify.appspot.com',
   );
+
 }

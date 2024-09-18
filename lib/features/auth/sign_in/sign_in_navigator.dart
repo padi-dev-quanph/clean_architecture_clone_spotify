@@ -6,6 +6,6 @@ class SignInNavigator extends AppNavigator {
   SignInNavigator({required super.context});
 
   void goToMain() {
-    GoRouter.of(context).goNamed(AppRoutes.home);
+    GoRouter.of(context).goNamed(AppRoutes.bottomTab);
   }
 }

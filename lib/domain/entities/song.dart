@@ -9,6 +9,7 @@ class SongEntity {
   final String cover;
   final String content;
   final List<Lyric> lyrics;
+  final bool isFavorite;
 
   const SongEntity({
     required this.title,
@@ -18,6 +19,7 @@ class SongEntity {
     required this.cover,
     required this.content,
     required this.lyrics,
+    required this.isFavorite,
   });
 
   factory SongEntity.empty() {
@@ -29,6 +31,31 @@ class SongEntity {
       cover: '',
       content: '',
       lyrics: [],
+      isFavorite: false,
+    );
+  }
+
+//   copy with
+
+  SongEntity copyWith({
+    String? title,
+    String? artist,
+    num? duration,
+    Timestamp? releaseDate,
+    String? cover,
+    String? content,
+    List<Lyric>? lyrics,
+    bool? isFavorite
+  }) {
+    return SongEntity(
+      title: title ?? this.title,
+      artist: artist ?? this.artist,
+      duration: duration ?? this.duration,
+      releaseDate: releaseDate ?? this.releaseDate,
+      cover: cover ?? this.cover,
+      content: content ?? this.content,
+      lyrics: lyrics ?? this.lyrics,
+      isFavorite: isFavorite ?? this.isFavorite
     );
   }
 }

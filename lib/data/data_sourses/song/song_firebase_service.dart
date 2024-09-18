@@ -7,6 +7,7 @@ import 'package:flutter_clean_architecture_spotify/domain/entities/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either> getNewSongs();
+  Future<Either> updateSong(SongEntity song);
 }
 
 class SongFirebaseServiceImpl implements SongFirebaseService {
@@ -28,6 +29,25 @@ class SongFirebaseServiceImpl implements SongFirebaseService {
     } catch (e) {
       log('Error: ${e.toString()}');
       return const Left('An error occurred, Please try again!');
+    }
+  }
+
+  @override
+  Future<Either> updateSong(SongEntity song) async {
+    try {
+      await FirebaseFirestore.instance.collection('songs').doc(song.content).set({
+        'title': song.title,
+        'artist': song.artist,
+        'duration': song.duration,
+        'releaseDate': song.releaseDate,
+        'cover': song.cover,
+        'content': song.content,
+        'lyrics': song.lyrics,
+        'isFavorite': song.isFavorite
+      });
+      return const Right('Success');
+    } catch(e) {
+      return Left(e.toString());
     }
   }
 }

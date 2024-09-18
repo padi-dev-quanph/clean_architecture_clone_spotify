@@ -4,6 +4,7 @@ import 'package:flutter_clean_architecture_spotify/data/repository/song/song_rep
 import 'package:flutter_clean_architecture_spotify/domain/repository/song/song.dart';
 import 'package:flutter_clean_architecture_spotify/domain/usecases/auth/sign_in_google_usecase.dart';
 import 'package:flutter_clean_architecture_spotify/domain/usecases/auth/sign_in_usecase.dart';
+import 'package:flutter_clean_architecture_spotify/domain/usecases/song/like_song.dart';
 import 'package:flutter_clean_architecture_spotify/features/auth/sign_in/sign_in_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/common/blocs/theme/theme_cubit.dart';
 import 'package:flutter_clean_architecture_spotify/data/data_sourses/auth/auth_firebase_service.dart';
@@ -29,6 +30,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SignUpUsecase>(SignUpUsecase());
   sl.registerSingleton<SignInUsecase>(SignInUsecase());
   sl.registerSingleton<SignInGoogleUsecase>(SignInGoogleUsecase());
+  sl.registerSingleton<LikeSOng>(LikeSOng());
 
   // Blocs
   sl.registerSingleton<ThemeCubit>(ThemeCubit());

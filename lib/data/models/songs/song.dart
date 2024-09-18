@@ -11,6 +11,7 @@ class SongModel {
   final String? cover;
   final String? content;
   final String? lyrics;
+  final bool? isFavorite;
 
   const SongModel(
       {this.title,
@@ -19,7 +20,8 @@ class SongModel {
       this.releaseDate,
       this.cover,
       this.content,
-      this.lyrics});
+      this.lyrics,
+      this.isFavorite});
 
   factory SongModel.fromJson(Map<String, dynamic> data) {
     return SongModel(
@@ -30,6 +32,7 @@ class SongModel {
       cover: data['cover'],
       content: data['content'],
       lyrics: data['lyrics'],
+      isFavorite: data['isFavorite'],
     );
   }
 
@@ -41,7 +44,8 @@ class SongModel {
       'releaseDate': releaseDate,
       'cover': cover,
       'content': content,
-      'lyrics': lyrics
+      'lyrics': lyrics,
+      'isFavorite': isFavorite
     };
   }
 
@@ -54,16 +58,17 @@ class SongModel {
       Timestamp? releaseDate,
       String? cover,
       String? content,
-      String? lyrics}) {
+      String? lyrics,
+      bool? isFavorite}) {
     return SongModel(
-      title: title ?? this.title,
-      artist: artist ?? this.artist,
-      duration: duration ?? this.duration,
-      releaseDate: releaseDate ?? this.releaseDate,
-      cover: cover ?? this.cover,
-      content: content ?? this.content,
-      lyrics: lyrics ?? this.lyrics,
-    );
+        title: title ?? this.title,
+        artist: artist ?? this.artist,
+        duration: duration ?? this.duration,
+        releaseDate: releaseDate ?? this.releaseDate,
+        cover: cover ?? this.cover,
+        content: content ?? this.content,
+        lyrics: lyrics ?? this.lyrics,
+        isFavorite: isFavorite ?? this.isFavorite);
   }
 }
 
@@ -90,6 +95,7 @@ extension SongModelX on SongModel {
           })
           .where((e) => e.words != 'xxx')
           .toList(),
+      isFavorite: isFavorite!,
     );
   }
 }
