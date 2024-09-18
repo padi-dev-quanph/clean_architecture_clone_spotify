@@ -1,16 +1,19 @@
-# flutter_clean_architecture_spotify
+# Flutter Music App
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
+![Screenshot_1](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/1.png)
+![Screenshot_2](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/2.png)
+![Screenshot_3](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/3.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### Development Notice
+
+1- Clone project with https://github.com/winter071203/flutter_ecommerce_app.git
+
+2- Run **flutter pub get** in terminal
+
+3- Run flutter run in terminal
