@@ -1,12 +1,12 @@
 # Flutter Music App
 
 
-
-
 ## Screenshots
-![Screenshot_1](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/1.png)
-![Screenshot_2](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/2.png)
-![Screenshot_3](https://github.com/winter071203/flutter_ecommerce_app/blob/main/assets/images/githubs/3.png)
+![Screenshot_1](https://raw.githubusercontent.com/padi-dev-quanph/clean_architecture_clone_spotify/main/assets/git/music1.png)
+![Screenshot_2](https://raw.githubusercontent.com/padi-dev-quanph/clean_architecture_clone_spotify/main/assets/git/music2.png)
+![Screenshot_3](https://raw.githubusercontent.com/padi-dev-quanph/clean_architecture_clone_spotify/main/assets/git/music3.png)
+![Screenshot_4](https://raw.githubusercontent.com/padi-dev-quanph/clean_architecture_clone_spotify/main/assets/git/music4.png)
+![Screenshot_5](https://raw.githubusercontent.com/padi-dev-quanph/clean_architecture_clone_spotify/main/assets/git/music5.png)
 
 
 
